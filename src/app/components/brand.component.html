@@ -1,0 +1,69 @@
+<div class="jumbotron">
+   <h5 class="display-4">Brand</h5>
+   <br /><br />
+  
+   
+      <form [formGroup]="brandForm" (ngSubmit)="add()">
+         <div class="row">
+            <div class="col-sm-9">
+               <input type="text" size="70" class="form-control" placeholder="Name" formControlName="name">
+            </div>
+            <div class="col-sm-3">
+               <input type="submit" value="Add" class="btn btn-primary btn-sm">
+            </div>
+         </div>
+         <br />
+         <div class="row">
+            <div class="col-sm-6">
+               <div *ngIf="errorFields && brandForm.controls.name.errors" class="alert alert-danger" role="alert">
+                  <div *ngIf="brandForm.controls.name.errors.required">Name is required</div>
+               </div>
+
+               <div *ngIf="error && msg" class="alert alert-warning" role="alert">
+                    {{ msg }}
+                </div>
+            </div>
+         </div>
+      </form>
+
+      <hr class="my-4">
+
+      <div class="row">
+         <div class="col-sm">
+            <div>
+               <ul *ngIf="brands" class="list-group">
+                  <li *ngFor="let brand of brands" class="list-group-item bg-transparent">
+                        <div class="row">
+                              <div class="col-sm-9">
+                                 <input type="text" size="70" class="form-control" [disabled]="brand.disabled" value="{{ brand.name }}" [(ngModel)]="brand.name">
+                              </div>
+                              <div class="col-sm-3" [hidden]="!brand.hidden">
+                                 <div class="row">
+                                    <div class="col-sm-1">
+                                       <i class="fa fa-pencil fa-lg" (click)="edit(brand)"> </i>
+                                    </div>
+                                    <div class="col-sm-1">
+                                       <i class="fa fa-trash fa-lg" (click)="delete(brand)"></i>
+                                    </div>
+                                 </div>
+                              </div>
+      
+                              <div class="col-sm-3" [hidden]="brand.hidden">
+                                 <div class="row">
+                                    <div class="col-sm-1">
+                                       <i class="fa fa-save fa-lg" (click)="save(brand)"> </i>
+                                    </div>
+                                    <div class="col-sm-1">
+                                       <i class="fa fa-times fa-lg" (click)="cancel(brand)"></i>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+  
+      
+</div>
